@@ -51,7 +51,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="308" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/yuh/burp/python" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -64,8 +64,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\Project\JavaProject\BurpSuite\FridaRpcTool" />
       <recent name="F:\Project\JavaProject\BurpSuite\FridaRpcTool\src\main\java\com\yuh\burp\python" />
+      <recent name="F:\Project\JavaProject\BurpSuite\FridaRpcTool" />
       <recent name="F:\Project\JavaProject\BurpSuite\FridaRpcTool\src\main\java\com\yuh\burp" />
       <recent name="F:\Project\JavaProject\BurpSuite\FridaRpcTool\src\main\java" />
     </key>
@@ -145,7 +145,8 @@
       <workItem from="1672190364216" duration="1036000" />
       <workItem from="1672203450595" duration="10604000" />
       <workItem from="1672277219205" duration="2419000" />
-      <workItem from="1672280678157" duration="12693000" />
+      <workItem from="1672280678157" duration="14154000" />
+      <workItem from="1672811921666" duration="4446000" />
     </task>
     <servers />
   </component>
