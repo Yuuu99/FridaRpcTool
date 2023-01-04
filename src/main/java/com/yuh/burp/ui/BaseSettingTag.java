@@ -20,6 +20,8 @@ public class BaseSettingTag {
     public JRadioButton buttonStatusStop = new JRadioButton("暂停");
     public JRadioButton buttonUrlDecodeStart = new JRadioButton("启用");
     public JRadioButton buttonUrlDecodeStop = new JRadioButton("暂停");
+    public JRadioButton buttonReqBodyStart = new JRadioButton("启用");
+    public JRadioButton buttonReqBodyStop = new JRadioButton("暂停");
     public JRadioButton buttonRespBodyStart = new JRadioButton("启用");
     public JRadioButton buttonRespBodyStop = new JRadioButton("暂停");
     public JPanel baseSettingPanel = new JPanel();
@@ -30,6 +32,7 @@ public class BaseSettingTag {
     public JPanel urlDecodePanel;
     public JPanel reqParamPanel;
     public JPanel reqHeadersPanel;
+    public JPanel reqBodyPanel;
     public JPanel respParamPanel;
     public JPanel respHeadersPanel;
     public JPanel respBodyPanel;
@@ -46,6 +49,7 @@ public class BaseSettingTag {
 
         reqParamPanel = addReqParamJTFPanel();
         reqHeadersPanel = addReqHeadersJTFPanel();
+        reqBodyPanel = addReqBodyJRBPanel("请求体解密：");
         respParamPanel = addRespParamJTFPanel();
         respHeadersPanel = addRespHeadersJTFPanel();
         respBodyPanel = addRespBodyJRBPanel("响应体解密：");
@@ -213,6 +217,34 @@ public class BaseSettingTag {
         baseSettingPanel.add(jt);
         panel.add(label);
         panel.add(jt);
+        baseSettingPanel.add(panel);
+        return panel;
+    }
+
+    public JPanel addReqBodyJRBPanel(String text){
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JLabel label = new JLabel(text);
+        baseSettingPanel.add(label);
+        buttonReqBodyStart.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                HttpProxyTag.burpReqBody = true;
+            }
+        });
+        buttonReqBodyStop.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                HttpProxyTag.burpReqBody = false;
+            }
+        });
+        ButtonGroup group = new ButtonGroup();
+        group.add(buttonReqBodyStart);
+        group.add(buttonReqBodyStop);
+        panel.add(label);
+        panel.add(buttonReqBodyStart);
+        panel.add(buttonReqBodyStop);
         baseSettingPanel.add(panel);
         return panel;
     }

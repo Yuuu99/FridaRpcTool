@@ -28,10 +28,13 @@ def startRpcServer():
     """
 
     # 调用 Frida
-    process = frida.get_usb_device().attach("App 包名")
+    device = frida.get_usb_device()
+    pid = device.spawn(["app 包名"])
+    process = device.attach(pid)
     script = process.create_script(jsCode)
     print('[*] FridaRpcTool Running')
     script.load()
+    device.resume(pid)
 
     app = FastAPI()
 

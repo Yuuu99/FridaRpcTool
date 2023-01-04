@@ -23,6 +23,7 @@ public class HttpProxyTag implements IMessageEditorTab {
     public JSONObject jsonObject;
     public static boolean burpStatus;
     public static boolean burpUrlDecode;
+    public static boolean burpReqBody;
     public static boolean burpRespBody;
 
     public HttpProxyTag(IBurpExtenderCallbacks callbacks) {
@@ -92,6 +93,7 @@ public class HttpProxyTag implements IMessageEditorTab {
         int stop = 0;
         StringBuffer httpParam = new StringBuffer("");
         StringBuffer httpHeaders = new StringBuffer("");
+        StringBuffer httpReqText = new StringBuffer("");
         StringBuffer httpCipherText = new StringBuffer("");
 
         IRequestInfo iRequestInfo = helpers.analyzeRequest(content);
@@ -118,6 +120,33 @@ public class HttpProxyTag implements IMessageEditorTab {
             }
             // 解密
             httpCipherText.append(decryptString(sourceData));
+        } else if (HttpProxyTag.burpReqBody) { // 请求体解密
+            start = iRequestInfo.getBodyOffset();
+
+            // HTTP 请求体
+            String requestText = null;
+            try {
+                requestText = new String(content,"UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                BurpExtender.stderr.println(e.getMessage());
+            }
+
+            httpReqText.append(requestText);
+
+            if (start != 0) {
+                // 请求体数据
+                String httpReqBodyText = httpReqText.substring(start);
+
+                httpCipherText.append(httpReqBodyText + "\n\n");
+
+                // 判断是否需要进行 URL 解码
+                if (HttpProxyTag.burpUrlDecode) {
+                    httpReqBodyText = helpers.urlDecode(httpReqBodyText);
+                }
+
+                // 解密
+                httpCipherText.append(decryptString(httpReqBodyText));
+            }
         }
 
         // 请求头解密
@@ -156,7 +185,7 @@ public class HttpProxyTag implements IMessageEditorTab {
 
         IResponseInfo iResponseInfo = helpers.analyzeResponse(content);
 
-        // 响应JSON参数解密
+        // 响应 JSON 参数解密
         if (burpRespParam.length() != 0) {
             start = iResponseInfo.getBodyOffset();
 

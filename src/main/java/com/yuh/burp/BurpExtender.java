@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class BurpExtender implements IBurpExtender, IHttpListener, IMessageEditorTabFactory {
     private String name = "FridaRpcTool";
-    private String version ="1.0";
+    private String version ="1.1";
     private IBurpExtenderCallbacks callbacks;
     private Tags tags;
 

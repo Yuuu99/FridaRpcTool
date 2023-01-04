@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static com.yuh.burp.utils.HttpUtil.decryptString;
+
 public class JsonUtil {
     // 递归解析 JSONObject 转换成 Map
     public static Map<String, Object> analysis(JSONObject jsonObject) {
